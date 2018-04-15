@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Carousel</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <section class="wrap">
+        <button id="leftArrow" class="arrow left">Left</button>
+        <div id="slider">
+        </div>
+        <button id="rightArrow" class="arrow right">Right</button>
+    </section>
+
+<script>
+    let slider = document.getElementById('slider');
+    let slide = document.createElement('div');
+    let arrowLeft = document.getElementById('leftArrow');
+    let arrowRight = document.getElementById('rightArrow');
+    let currentSlide = 0;
+    for (let i =0; i < 4; i++){
+        slide.innerHTML +=
+                `<div class="slide slide${i}">
+                   <div class="slide-content">
+                    <span> Image ${i}</span>
+                   </div>
+                </div>`
+    }
+    slider.appendChild(slide);
+    let allSlide = document.getElementsByClassName('slide');
+    for (let eachSlide of allSlide){
+        eachSlide.style.display = 'none';
+    }
+
+   function slideStart(){
+       allSlide[0].style.display = 'block';
+       current = 0;
+   }
+
+    function slideReset(){
+        for (let eachSlide of allSlide){
+            eachSlide.style.display = 'none';
+        }
+    }
+
+    arrowLeft.addEventListener('click', function(){
+        slideReset();
+        if (currentSlide === 0){
+            currentSlide = allSlide.length - 1;
+        } else {
+            currentSlide--
+        }
+        allSlide[currentSlide].style.display = 'block';
+    });
+
+    arrowRight.addEventListener('click', function(){
+        slideReset();
+        if (currentSlide === allSlide.length-1){
+            currentSlide = 0;
+        } else {
+            currentSlide++
+        }
+        allSlide[currentSlide].style.display = 'block';
+    });
+
+
+
+    slideStart();
+</script>
+</body>
+</html>
